@@ -1,4 +1,4 @@
 
 public abstract class DoneCriteria {
-	private String cText;
+	protected String cText;
 }

@@ -23,22 +23,57 @@ public abstract class Method {
 		this.properties = new ArrayList<Property>(Arrays.asList(properties));
 	}
 	
-	public void build(String text) throws PropertyNotFoundException
+	public String buildConstructor(ArrayList<String> entries)
 	{
-		String[] entries = text.split(" ");
-		Property currentProperty = null;
+		String contructor = this.instantiation;
 		
 		for(String entry : entries)
 		{
-			if(currentProperty == null)
+			contructor += entry;
+			
+			if(entry.endsWith(")"))
 			{
-				currentProperty = findProperty(entry);
+				return contructor;
+			}
+		}
+		
+		return contructor + ")";
+	}
+	
+	public ArrayList<String> buildAdditionalProperties(ArrayList<String> entries) throws PropertyNotFoundException
+	{
+		ArrayList<String> additionalProperties = new ArrayList<String>();
+		
+		//Remove mandatory arguments
+		for(int i = 0; i < entries.size(); i++)
+		{
+			if(entries.get(0).endsWith(")"))
+			{
+				entries.remove(0);
+				break;
 			}
 			else
 			{
-				currentProperty.setValue(entry);
+				entries.remove(0);
 			}
 		}
+		
+		boolean isProperty = true;
+		Property property = null;
+		
+		for(String entry : entries)
+		{
+			if(isProperty)
+			{
+				property = this.findProperty(entry);
+			}
+			else
+			{
+				additionalProperties.add(property.getcName() + entry);
+			}
+		}
+		
+		return additionalProperties;
 	}
 	
 	private Property findProperty(String entry) throws PropertyNotFoundException

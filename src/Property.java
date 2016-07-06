@@ -6,15 +6,23 @@ import exceptions.InvalidTypeException;
 public class Property {
 	private ArrayList<String> aliases;
 	private String type;
-	private String value = null;
+	private boolean required = false;
+	private int position = -1;
+	private String cName;
 	
-	public Property(String type, String... aliases) throws InvalidTypeException
+	public Property(String type, String cName, boolean required, int position, String... aliases) throws InvalidTypeException
 	{
 		if( ! validateType(type))
 			throw new InvalidTypeException();
 		
+		this.setcName(cName);
 		this.type = type;
 		this.aliases = new ArrayList<String>(Arrays.asList(aliases));
+	}
+	
+	public Property(String type, String cName, String...aliases) throws InvalidTypeException
+	{
+		this(type, cName, false, -1, aliases);
 	}
 	
 	private boolean validateType(String type)
@@ -42,9 +50,14 @@ public class Property {
 		
 		return false;
 	}
-	
-	public void setValue(String value)
+
+	public String getcName()
 	{
-		this.value = value;
+		return cName;
+	}
+
+	public void setcName(String cName)
+	{
+		this.cName = cName;
 	}
 }
