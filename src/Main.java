@@ -18,6 +18,7 @@ public class Main {
 		ArrayList<Step> steps = new ArrayList<Step>();
 		boolean inBlock = false;
 		Block block = null;
+		boolean inComment = false;
 		
 		try
 		{
@@ -25,6 +26,29 @@ public class Main {
 			BufferedReader reader = new BufferedReader(fileReader);
 			while((line = reader.readLine()) != null)
 			{
+				if(inComment)
+				{
+					if(line.indexOf("##") != -1)
+					{
+						inComment = false;
+					}
+					
+					continue;
+				}
+				else
+				{
+					if(line.indexOf("##") != -1)
+					{
+						inComment = true;
+						continue;
+					}
+				}
+				
+				if(line.indexOf("//") != -1)
+				{
+					line = line.substring(0, line.indexOf("//"));
+				}
+				
 				if(line.indexOf('{') != -1)
 				{
 					inBlock = true;
