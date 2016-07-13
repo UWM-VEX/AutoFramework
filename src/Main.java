@@ -8,7 +8,6 @@ import exceptions.*;
 public class Main {
 
 	public static ArrayList<Method> methods;
-	public static ArrayList<Command> commands;
 	private static int commandCounter = 0;
 	
 	public static void main(String[] args)
@@ -19,6 +18,8 @@ public class Main {
 		boolean inBlock = false;
 		Block block = null;
 		boolean inComment = false;
+		
+		defineMethods();
 		
 		try
 		{
@@ -108,6 +109,21 @@ public class Main {
 		catch(IOException e)
 		{
 			System.out.println("File not found.");
+		}
+	}
+	
+	public static void defineMethods()
+	{
+		try
+		{
+			methods = new ArrayList<Method>();
+			Method driveToWP = new Method("DriveToWP", "DriveToWP", "initDriveToWP", "isFinished", new Property("double", "magnitude", "mag", "magnitude", "y"));
+			methods.add(driveToWP);
+		}
+		catch (InvalidTypeException e)
+		{
+			System.out.println("Invalid Type");
+			System.exit(1);
 		}
 	}
 

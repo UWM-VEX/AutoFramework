@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 import exceptions.PropertyNotFoundException;
 
-public abstract class Method {
+public class Method {
 	private ArrayList<Property> properties;
 	private String javaCommand;
 	private String cVariable;
@@ -12,13 +12,13 @@ public abstract class Method {
 	private String reference;
 	private String doneReference;
 	
-	public Method(String javaCommand, String cVariable, String declaration, String instantiation, String reference, String doneReference, Property... properties)
+	public Method(String javaCommand, String declaration, String instantiation, String doneReference, Property... properties)
 	{
 		this.javaCommand = javaCommand;
-		this.cVariable = cVariable;
+		this.cVariable = "To Do";
 		this.declaration = declaration;
 		this.instantiation = instantiation;
-		this.reference = reference;
+		this.reference = "To Do";
 		this.doneReference = doneReference;
 		this.properties = new ArrayList<Property>(Arrays.asList(properties));
 	}

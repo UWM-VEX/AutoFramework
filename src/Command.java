@@ -14,12 +14,20 @@ public class Command extends Step {
 	{
 		this.entries = new ArrayList<String>(Arrays.asList(text.split(" ")));
 		
-		if(this.entries.get(1).equals("="))
+		if(this.entries.size() > 1)
 		{
-			this.method = Main.identifyMethod(entries.get(2));
-			entries.remove(0);
-			entries.remove(1);
-			entries.remove(2);
+			if(this.entries.get(1).equals("="))
+			{
+				this.method = Main.identifyMethod(entries.get(2));
+				entries.remove(0);
+				entries.remove(1);
+				entries.remove(2);
+			}
+			else
+			{
+				this.method = Main.identifyMethod(entries.get(0));
+				this.entries.remove(0);
+			}
 		}
 		else
 		{

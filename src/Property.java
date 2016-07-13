@@ -6,11 +6,9 @@ import exceptions.InvalidTypeException;
 public class Property {
 	private ArrayList<String> aliases;
 	private String type;
-	private boolean required = false;
-	private int position = -1;
 	private String cName;
 	
-	public Property(String type, String cName, boolean required, int position, String... aliases) throws InvalidTypeException
+	public Property(String type, String cName, String... aliases) throws InvalidTypeException
 	{
 		if( ! validateType(type))
 			throw new InvalidTypeException();
@@ -19,12 +17,7 @@ public class Property {
 		this.type = type;
 		this.aliases = new ArrayList<String>(Arrays.asList(aliases));
 	}
-	
-	public Property(String type, String cName, String...aliases) throws InvalidTypeException
-	{
-		this(type, cName, false, -1, aliases);
-	}
-	
+		
 	private boolean validateType(String type)
 	{
 		return type.equals("char") || type.equals("unsigned char") || type.equals("signed char")
