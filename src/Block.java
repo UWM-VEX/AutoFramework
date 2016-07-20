@@ -6,6 +6,11 @@ import exceptions.PropertyNotFoundException;
 public class Block extends Step {
 	private ArrayList<Command> commands;
 	
+	public Block()
+	{
+		this.commands = new ArrayList<Command>();
+	}
+	
 	public void addCommand(String command) throws MethodNotFoundException, PropertyNotFoundException
 	{
 		this.commands.add(new Command(command));
@@ -20,6 +25,6 @@ public class Block extends Step {
 			returnText += command.toString() + "\n";
 		}
 		
-		return returnText;
+		return "Block\n" + returnText + "End Block\n";
 	}
 }

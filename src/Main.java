@@ -15,9 +15,12 @@ public class Main {
 		String fileName = args[0];
 		String line = null;
 		ArrayList<Step> steps = new ArrayList<Step>();
+		ArrayList<Mode> modes = new ArrayList<Mode>();
 		boolean inBlock = false;
 		Block block = null;
+		Mode mode = null;
 		boolean inComment = false;
+		boolean inMode = false;
 		
 		defineMethods();
 		
@@ -45,28 +48,55 @@ public class Main {
 					}
 				}
 				
-				if(line.indexOf("//") != -1)
+				if(inMode)
 				{
-					line = line.substring(0, line.indexOf("//"));
-				}
-				
-				if(line.indexOf('{') != -1)
-				{
-					inBlock = true;
-					block = new Block();
-				}
-				else if(inBlock)
-				{
-					if(line.indexOf('}') != -1)
+					if(line.indexOf("End Mode") != -1)
 					{
-						inBlock = false;
-						steps.add(block);
+						inMode = false;
+						modes.add(mode);
+						continue;
+					}
+					
+					if(line.indexOf("//") != -1)
+					{
+						line = line.substring(0, line.indexOf("//"));
+					}
+					
+					if(line.indexOf('{') != -1)
+					{
+						inBlock = true;
+						block = new Block();
+					}
+					else if(inBlock)
+					{
+						if(line.indexOf('}') != -1)
+						{
+							inBlock = false;
+							mode.addStep(block);
+						}
+						else
+						{
+							try
+							{
+								block.addCommand(line);
+							}
+							catch (MethodNotFoundException e)
+							{
+								System.out.println("Undefined Method: " + line);
+								System.exit(1);
+							}
+							catch (PropertyNotFoundException e)
+							{
+								System.out.println("undefined Property: " + line);
+								System.exit(1);
+							}
+						}
 					}
 					else
 					{
 						try
 						{
-							block.addCommand(line);
+							mode.addStep(new Command(line));
 						}
 						catch (MethodNotFoundException e)
 						{
@@ -82,24 +112,23 @@ public class Main {
 				}
 				else
 				{
-					try
+					if(line.indexOf("Mode") != -1)
 					{
-						steps.add(new Command(line));
-					}
-					catch (MethodNotFoundException e)
-					{
-						System.out.println("Undefined Method: " + line);
-						System.exit(1);
-					}
-					catch (PropertyNotFoundException e)
-					{
-						System.out.println("undefined Property: " + line);
-						System.exit(1);
+						inMode = true;
+						
+						try
+						{
+							mode = new Mode(line);
+						}
+						catch (Exception e)
+						{
+							System.exit(1);
+						}
 					}
 				}
 			}
 			
-			for(Step element : steps)
+			for(Mode element : modes)
 			{
 				System.out.println(element);
 			}
