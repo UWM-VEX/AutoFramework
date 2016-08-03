@@ -24,17 +24,13 @@ public class Mode {
 		this.steps.add(step);
 	}
 	
+	public String getName()
+	{
+		return this.name;
+	}
+	
 	public String toString()
 	{
-		String returnText = "Mode: " + this.name + "\n";
-		
-		for (Step step : this.steps)
-		{
-			returnText += step.toString();
-		}
-		
-		returnText += "\nEnd Mode";
-		
-		return returnText;
+		return this.name;
 	}
 }

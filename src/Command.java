@@ -51,4 +51,9 @@ public class Command extends Step {
 		
 		return returnText;
 	}
+	
+	public Method getMethod()
+	{
+		return this.method;
+	}
 }

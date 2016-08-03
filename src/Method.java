@@ -91,4 +91,9 @@ public class Method {
 	{
 		return this.javaCommand;
 	}
+	
+	public String getDeclaration()
+	{
+		return this.declaration;
+	}
 }

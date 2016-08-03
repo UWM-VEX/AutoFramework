@@ -14,7 +14,6 @@ public class Main {
 	{
 		String fileName = args[0];
 		String line = null;
-		ArrayList<Step> steps = new ArrayList<Step>();
 		ArrayList<Mode> modes = new ArrayList<Mode>();
 		boolean inBlock = false;
 		Block block = null;
