@@ -167,7 +167,7 @@ public class Output {
 			pastExecutions = line.indexOf("// END OF EXECUTION") != -1;
 			
 			if( ! hitDeclarations || (pastDeclarations && ! hitInstantiations)
-					|| (pastInstantiations && ! hitExecutions))
+					|| (pastInstantiations && ! hitExecutions) || pastExecutions)
 			{
 				writer.println(line);
 			}
