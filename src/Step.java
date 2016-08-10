@@ -8,4 +8,13 @@ public abstract class Step {
 	private int minTime = -1;
 	
 	public abstract String toString();
+	public String getDeclaration()
+	{
+		return "";
+	}
+	public String getInstantiation()
+	{
+		return "";
+	}
+	public abstract String getExecution(int step);
 }

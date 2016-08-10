@@ -155,25 +155,48 @@ public class Output {
 		
 		boolean hitDeclarations = false;
 		boolean pastDeclarations = false;
+		boolean hitInstantiations = false;
+		boolean pastInstantiations = false;
+		boolean hitExecutions = false;
+		boolean pastExecutions = false;
 		
 		while((line = reader.readLine()) != null)
 		{
-			pastDeclarations = line.indexOf("// END OF MODES") != -1;
+			pastDeclarations = line.indexOf("// END OF DECLARATIONS") != -1;
+			pastInstantiations = line.indexOf("// END OF INSTANTIATIONS") != -1;
+			pastExecutions = line.indexOf("// END OF EXECUTION") != -1;
 			
-			if( ! hitDeclarations || pastDeclarations)
+			if( ! hitDeclarations || (pastDeclarations && ! hitInstantiations)
+					|| (pastInstantiations && ! hitExecutions))
 			{
 				writer.println(line);
 			}
 			
-			if( ! hitDeclarations && line.indexOf("// START OF MODES") != -1)
+			if( ! hitDeclarations && line.indexOf("// START OF DECLARATIONS") != -1)
 			{
 				hitDeclarations = true;
-				
-				int i = 0;
+								
+				for(Mode mode : modes)
+				{
+					writer.println(mode.getDeclarations());
+				}
+			}
+			else if( ! hitInstantiations && line.indexOf("// START OF INSTANTIATIONS") != -1)
+			{
+				hitInstantiations = true;
 				
 				for(Mode mode : modes)
 				{
-					writer.println("#define " + mode + i++);
+					writer.println(mode.getInstantiations());
+				}
+			}
+			else if( ! hitExecutions && line.indexOf("// START OF EXECUTIONS") != -1)
+			{
+				hitExecutions = true;
+				
+				for(Mode mode : modes)
+				{
+					writer.println(mode.getExecutions());
 				}
 			}
 		}

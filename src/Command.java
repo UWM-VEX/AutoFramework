@@ -9,10 +9,12 @@ public class Command extends Step {
 	private ArrayList<String> entries;
 	private String constructor;
 	private ArrayList<String> additionalProperties;
+	private String name;
 	
-	public Command(String text) throws MethodNotFoundException, PropertyNotFoundException
+	public Command(String text, int id) throws MethodNotFoundException, PropertyNotFoundException
 	{
 		this.entries = new ArrayList<String>(Arrays.asList(text.split(" ")));
+		this.name = "command" + id;
 		
 		if(this.entries.size() > 1)
 		{
@@ -55,5 +57,33 @@ public class Command extends Step {
 	public Method getMethod()
 	{
 		return this.method;
+	}
+	
+	public String getDeclaration()
+	{
+		return this.method.getDeclaration();
+	}
+	
+	public String getInstantiation()
+	{
+		return this.constructor;
+	}
+	
+	public String getRunReference()
+	{
+		return this.method.getRunReference(this.name);
+	}
+	
+	public String getDoneReference()
+	{
+		return this.method.getDoneReference(this.name);
+	}
+	
+	public String getExecution(int step)
+	{
+		return "\t\t\tcase(" + step + "):\n"
+			 + "\t\t\t\t" + getRunReference() + "\n\n"
+		   	 + "autonomousInfo.isFinished = " + getDoneReference() + "\n"
+			 + "\t\t\t\tbreak;";
 	}
 }

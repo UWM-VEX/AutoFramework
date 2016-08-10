@@ -27,6 +27,7 @@ public class Main {
 		{
 			FileReader fileReader = new FileReader(fileName);
 			BufferedReader reader = new BufferedReader(fileReader);
+			int id = 0;
 			while((line = reader.readLine()) != null)
 			{
 				if(inComment)
@@ -77,7 +78,7 @@ public class Main {
 						{
 							try
 							{
-								block.addCommand(line);
+								block.addCommand(line, ++id);
 							}
 							catch (MethodNotFoundException e)
 							{
@@ -95,7 +96,7 @@ public class Main {
 					{
 						try
 						{
-							mode.addStep(new Command(line));
+							mode.addStep(new Command(line, ++id));
 						}
 						catch (MethodNotFoundException e)
 						{
@@ -145,7 +146,7 @@ public class Main {
 		try
 		{
 			methods = new ArrayList<Method>();
-			Method driveToWP = new Method("DriveToWP", "DriveToWP", "initDriveToWP", "isFinished", new Property("double", "magnitude", "mag", "magnitude", "y"));
+			Method driveToWP = new Method("DriveToWP", "DriveToWP", "initDriveToWP", "isFinished", true, new Property("double", "magnitude", "mag", "magnitude", "y"));
 			methods.add(driveToWP);
 		}
 		catch (InvalidTypeException e)

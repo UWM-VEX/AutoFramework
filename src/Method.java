@@ -6,21 +6,21 @@ import exceptions.PropertyNotFoundException;
 public class Method {
 	private ArrayList<Property> properties;
 	private String javaCommand;
-	private String cVariable;
 	private String declaration;
 	private String instantiation;
 	private String reference;
 	private String doneReference;
+	private boolean pointer;
 	
-	public Method(String javaCommand, String declaration, String instantiation, String doneReference, Property... properties)
+	public Method(String javaCommand, String declaration, String instantiation, String doneReference, boolean pointer, Property... properties)
 	{
 		this.javaCommand = javaCommand;
-		this.cVariable = "To Do";
 		this.declaration = declaration;
 		this.instantiation = instantiation;
 		this.reference = "To Do";
 		this.doneReference = doneReference;
 		this.properties = new ArrayList<Property>(Arrays.asList(properties));
+		this.pointer = pointer;
 	}
 	
 	public String buildConstructor(ArrayList<String> entries)
@@ -95,5 +95,15 @@ public class Method {
 	public String getDeclaration()
 	{
 		return this.declaration;
+	}
+	
+	public String getRunReference(String instance)
+	{
+		return this.javaCommand + "(" + ((this.pointer) ? "&" : "") + instance + ");";
+	}
+	
+	public String getDoneReference(String instance)
+	{
+		return instance + this.doneReference;
 	}
 }
