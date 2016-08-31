@@ -9,13 +9,21 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Output {
+	public static void outputToCode(ArrayList<Mode> modes) throws Exception
+	{
+		writeAutoH(modes);
+		writeInitC(modes);
+		writeAutoC(modes);
+	}
+	
 	public static void writeAutoH(ArrayList<Mode> modes) throws Exception
 	{
+		System.out.println("Writing Auto.h");
 		FileReader fileReader;
 		
 		try
 		{
-			fileReader = new FileReader("\\include\\Auto.h");
+			fileReader = new FileReader(new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h"));
 		}
 		catch (FileNotFoundException e)
 		{
@@ -25,8 +33,8 @@ public class Output {
 		
 		BufferedReader reader = new BufferedReader(fileReader);
 		String line;
-		PrintWriter writer = new PrintWriter("\\include\\Auto.h.temp");
-		
+		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h.temp"));
+
 		boolean hitDeclarations = false;
 		boolean pastDeclarations = false;
 		
@@ -47,32 +55,40 @@ public class Output {
 				
 				for(Mode mode : modes)
 				{
-					writer.println("#define " + mode + i++);
+					writer.println("#define " + mode + " " + i++);
 				}
 			}
 		}
 		
+		reader.close();
 		writer.close();
-		File oldFile = new File("\\include\\Auto.h");
+		
+		System.out.println("Finished with writer");
+				
+		File oldFile = new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h");
 		Path oldFilePath = oldFile.toPath();
 		Files.delete(oldFilePath);
+		System.out.println("1");
 		
-		File tempFile = new File("\\include\\Auto.h.temp");
-		File newFile = new File("\\include\\Auto.h");
+		File tempFile = new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h.temp");
+		File newFile = new File(System.getProperty("user.dir") + "\\robot\\code\\include\\Auto.h");
 		
 		if( ! tempFile.renameTo(newFile))
 		{
 			throw new Exception("An error occurred while rewriting Auto.h");
 		}
+		
+		System.out.println("Finished writing to Auto.h");
 	}
 	
 	public static void writeInitC(ArrayList<Mode> modes) throws Exception
 	{
+		System.out.println("Writing to init.c");
 		FileReader fileReader;
 		
 		try
 		{
-			fileReader = new FileReader("\\src\\init.c");
+			fileReader = new FileReader(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c"));
 		}
 		catch (FileNotFoundException e)
 		{
@@ -82,7 +98,7 @@ public class Output {
 		
 		BufferedReader reader = new BufferedReader(fileReader);
 		String line;
-		PrintWriter writer = new PrintWriter("\\include\\init.c.temp");
+		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c.temp"));
 		
 		boolean hitDeclarations = false;
 		boolean deletedLine = false;
@@ -121,27 +137,31 @@ public class Output {
 			}
 		}
 		
+		reader.close();
 		writer.close();
-		File oldFile = new File("\\src\\init.c");
+		File oldFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c");
 		Path oldFilePath = oldFile.toPath();
 		Files.delete(oldFilePath);
 		
-		File tempFile = new File("\\src\\init.c.temp");
-		File newFile = new File("\\src\\init.c");
+		File tempFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c.temp");
+		File newFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\init.c");
 		
 		if( ! tempFile.renameTo(newFile))
 		{
 			throw new Exception("An error occurred while rewriting init.c");
 		}
+		
+		System.out.println("Finished writing to init.c");
 	}
 	
 	public static void writeAutoC(ArrayList<Mode> modes) throws Exception
 	{
+		System.out.println("Writing to Auto.c");
 		FileReader fileReader;
 		
 		try
 		{
-			fileReader = new FileReader("\\src\\auto.c");
+			fileReader = new FileReader(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c"));
 		}
 		catch (FileNotFoundException e)
 		{
@@ -151,7 +171,7 @@ public class Output {
 		
 		BufferedReader reader = new BufferedReader(fileReader);
 		String line;
-		PrintWriter writer = new PrintWriter("\\src\\auto.c.temp");
+		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c.temp"));
 		
 		boolean hitDeclarations = false;
 		boolean pastDeclarations = false;
@@ -202,16 +222,18 @@ public class Output {
 		}
 		
 		writer.close();
-		File oldFile = new File("\\src\\auto.c");
+		reader.close();
+		File oldFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c");
 		Path oldFilePath = oldFile.toPath();
 		Files.delete(oldFilePath);
 		
-		File tempFile = new File("\\src\\auto.c.temp");
-		File newFile = new File("\\src\\auto.c");
+		File tempFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c.temp");
+		File newFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\auto.c");
 		
 		if( ! tempFile.renameTo(newFile))
 		{
 			throw new Exception("An error occurred while rewriting auto.c");
 		}
+		System.out.println("Finished writing to auto.c");
 	}
 }

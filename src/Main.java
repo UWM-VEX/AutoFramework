@@ -134,10 +134,17 @@ public class Main {
 			}
 			
 			reader.close();
+			
+			Output.outputToCode(modes);
 		}
 		catch(IOException e)
 		{
 			System.out.println("File not found.");
+		}
+		catch(Exception e)
+		{
+			System.out.println("An unspecified error has occurred");
+			e.printStackTrace();
 		}
 	}
 	
