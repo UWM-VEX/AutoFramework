@@ -40,7 +40,7 @@ public class Mode {
 		
 		for(Step step : this.steps)
 		{
-			declarations += step.getDeclaration() + "\n";
+			declarations += step.getDeclaration() + System.getProperty("line.separator");
 		}
 		
 		return declarations;
@@ -48,11 +48,11 @@ public class Mode {
 	
 	public String getInstantiations()
 	{
-		String instantiations = "if(autonomousSelection == " + this.name + ")\n{\n";
+		String instantiations = "if(autonomousSelection == " + this.name + ")" + System.getProperty("line.separator") + "{" + System.getProperty("line.separator");
 		
 		for(Step step : this.steps)
 		{
-			instantiations += "\t" + step.getInstantiation() + "\n";
+			instantiations += "\t" + step.getInstantiation() + System.getProperty("line.separator");
 		}
 		
 		instantiations += "}";
@@ -62,21 +62,21 @@ public class Mode {
 	
 	public String getExecutions()
 	{
-		String executions = "\tcase(" + this.name + "):\n"
-				+ "\t\tswitch(autonomousInfo.step)\n"
-				+ "{\n";
+		String executions = "\t\tcase(" + this.name + "):" + System.getProperty("line.separator")
+				+ "\t\tswitch(autonomousInfo.step)" + System.getProperty("line.separator")
+				+ "\t\t{" + System.getProperty("line.separator");
 		
 		int i = 1;
 		
 		for(Step step : this.steps)
 		{
-			executions += step.getExecution(i++) + "\n";
+			executions += step.getExecution(i++) + System.getProperty("line.separator");
 		}
 		
-		executions += "\n\n\t\t\tdefault:\n"
-				+ "\t\t\t\tisAuto = 0;\n"
-				+ "\t\t\t\tbreak;\n"
-				+ "\t\t\t}\n"
+		executions +=  System.getProperty("line.separator") + System.getProperty("line.separator") + "\t\t\tdefault:" + System.getProperty("line.separator")
+				+ "\t\t\t\tisAuto = 0;" + System.getProperty("line.separator")
+				+ "\t\t\t\tbreak;" + System.getProperty("line.separator")
+				+ "\t\t}" + System.getProperty("line.separator")
 				+ "\t\tbreak;";
 		
 		return executions;

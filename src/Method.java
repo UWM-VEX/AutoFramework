@@ -104,6 +104,13 @@ public class Method {
 	
 	public String getDoneReference(String instance)
 	{
-		return instance + this.doneReference;
+		if(pointer)
+		{
+			return "(*" + instance + ")" + this.doneReference + ";";
+		}
+		else
+		{
+			return instance + this.doneReference + ";";
+		}
 	}
 }

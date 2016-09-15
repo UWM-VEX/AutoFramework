@@ -61,12 +61,12 @@ public class Command extends Step {
 	
 	public String getDeclaration()
 	{
-		return this.method.getDeclaration();
+		return this.method.getDeclaration() + " " + this.name + ";";
 	}
 	
 	public String getInstantiation()
 	{
-		return this.constructor;
+		return this.name + " = " + this.constructor + ";";
 	}
 	
 	public String getRunReference()
@@ -81,9 +81,9 @@ public class Command extends Step {
 	
 	public String getExecution(int step)
 	{
-		return "\t\t\tcase(" + step + "):\n"
-			 + "\t\t\t\t" + getRunReference() + "\n\n"
-		   	 + "autonomousInfo.isFinished = " + getDoneReference() + "\n"
+		return "\t\t\tcase(" + step + "):" + System.getProperty("line.separator")
+			 + "\t\t\t\t" + getRunReference()  + System.getProperty("line.separator") + System.getProperty("line.separator")
+		   	 + "\t\t\t\tautonomousInfo.isFinished = " + getDoneReference()  + System.getProperty("line.separator")
 			 + "\t\t\t\tbreak;";
 	}
 }

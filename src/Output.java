@@ -182,9 +182,18 @@ public class Output {
 		
 		while((line = reader.readLine()) != null)
 		{
-			pastDeclarations = line.indexOf("// END OF DECLARATIONS") != -1;
-			pastInstantiations = line.indexOf("// END OF INSTANTIATIONS") != -1;
-			pastExecutions = line.indexOf("// END OF EXECUTION") != -1;
+			if ( ! pastDeclarations)
+			{
+				pastDeclarations = line.indexOf("// END OF DECLARATIONS") != -1;
+			}
+			if ( ! pastInstantiations)
+			{
+				pastInstantiations = line.indexOf("// END OF INSTANTIATIONS") != -1;
+			}
+			if ( ! pastExecutions)
+			{
+				pastExecutions = line.indexOf("// END OF EXECUTION") != -1;
+			}
 			
 			if( ! hitDeclarations || (pastDeclarations && ! hitInstantiations)
 					|| (pastInstantiations && ! hitExecutions) || pastExecutions)
