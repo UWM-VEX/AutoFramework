@@ -83,7 +83,7 @@ public class Command extends Step {
 	{
 		return "\t\t\tcase(" + step + "):" + System.getProperty("line.separator")
 			 + "\t\t\t\t" + getRunReference()  + System.getProperty("line.separator") + System.getProperty("line.separator")
-		   	 + "\t\t\t\tautonomousInfo.isFinished = " + getDoneReference()  + System.getProperty("line.separator")
+		   	 + "\t\t\t\tautonomousInfo.isFinished = " + getDoneReference() + ";" + System.getProperty("line.separator")
 			 + "\t\t\t\tbreak;";
 	}
 }

@@ -30,14 +30,14 @@ public class Block extends Step {
 	
 	public String getExecution(int step)
 	{
-		String execution = "\t\tcase("+step+"):\n";
+		String execution = "\t\t\tcase("+step+"):" + System.getProperty("line.separator");
 		
 		for(Command command : this.commands)
 		{
-			execution += "\t\t\t" + command.getRunReference() + "\n";
+			execution += "\t\t\t\t" + command.getRunReference() + System.getProperty("line.separator");
 		}
 		
-		execution += "\t\t\tautonomousInfo.isFinished = ";
+		execution += "\t\t\t\tautonomousInfo.isFinished = ";
 		
 		boolean isFirst = true;
 		
@@ -54,7 +54,7 @@ public class Block extends Step {
 			}
 		}
 		
-		execution += ";\n\t\t\tbreak;";
+		execution += ";" + System.getProperty("line.separator") + "\t\t\t\tbreak;";
 		
 		return execution;
 	}

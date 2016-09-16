@@ -106,7 +106,7 @@ public class Method {
 	{
 		if(pointer)
 		{
-			return "(*" + instance + ")" + this.doneReference + ";";
+			return "(*" + instance + ")" + this.doneReference;
 		}
 		else
 		{
