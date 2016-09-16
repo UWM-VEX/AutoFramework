@@ -105,15 +105,6 @@ public class Output {
 		
 		while((line = reader.readLine()) != null)
 		{
-			if( ! deletedLine)
-			{
-				writer.println(line);
-			}
-			else
-			{
-				deletedLine = false;
-			}
-			
 			if( ! hitDeclarations && line.indexOf("// MODE DEFINITIONS") != -1)
 			{
 				hitDeclarations = true;
@@ -125,6 +116,7 @@ public class Output {
 				
 				for(Mode mode : modes)
 				{
+					i++;
 					modesDefinition += "\"" + mode.toString() + "\"";
 					
 					if(i != modes.size())
@@ -133,7 +125,16 @@ public class Output {
 					}
 				}
 				
-				writer.println("const char * selectionText[] = {" + modesDefinition + "};");
+				writer.println("\tconst char * selectionText[] = {" + modesDefinition + "}; // MODE DEFINITIONS");
+			}
+			
+			if( ! deletedLine)
+			{
+				writer.println(line);
+			}
+			else
+			{
+				deletedLine = false;
 			}
 		}
 		
