@@ -9,21 +9,21 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Output {
-	public static void outputToCode(ArrayList<Mode> modes) throws Exception
+	public static void outputToCode(ArrayList<Mode> modes, String pathToCode) throws Exception
 	{
-		writeAutoH(modes);
-		writeInitC(modes);
-		writeAutoC(modes);
+		writeAutoH(modes, pathToCode);
+		writeInitC(modes, pathToCode);
+		writeAutoC(modes, pathToCode);
 	}
 	
-	public static void writeAutoH(ArrayList<Mode> modes) throws Exception
+	public static void writeAutoH(ArrayList<Mode> modes, String pathToCode) throws Exception
 	{
 		System.out.println("Writing Auto.h");
 		FileReader fileReader;
 		
 		try
 		{
-			fileReader = new FileReader(new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h"));
+			fileReader = new FileReader(new File(System.getProperty("user.dir") + pathToCode + "\\include\\", "Auto.h"));
 		}
 		catch (FileNotFoundException e)
 		{
@@ -33,8 +33,9 @@ public class Output {
 		
 		BufferedReader reader = new BufferedReader(fileReader);
 		String line;
-		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h.temp"));
-
+		
+		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + pathToCode + "\\include\\", "Auto.h.temp"));
+		
 		boolean hitDeclarations = false;
 		boolean pastDeclarations = false;
 		
@@ -65,13 +66,13 @@ public class Output {
 		
 		System.out.println("Finished with writer");
 				
-		File oldFile = new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h");
+		File oldFile = new File(System.getProperty("user.dir") + pathToCode + "\\include\\", "Auto.h");
 		Path oldFilePath = oldFile.toPath();
 		Files.delete(oldFilePath);
 		System.out.println("1");
 		
-		File tempFile = new File(System.getProperty("user.dir") + "\\robot\\code\\include\\", "Auto.h.temp");
-		File newFile = new File(System.getProperty("user.dir") + "\\robot\\code\\include\\Auto.h");
+		File tempFile = new File(System.getProperty("user.dir") + pathToCode + "\\include\\", "Auto.h.temp");
+		File newFile = new File(System.getProperty("user.dir") + pathToCode + "\\include\\\\Auto.h");
 		
 		if( ! tempFile.renameTo(newFile))
 		{
@@ -81,14 +82,14 @@ public class Output {
 		System.out.println("Finished writing to Auto.h");
 	}
 	
-	public static void writeInitC(ArrayList<Mode> modes) throws Exception
+	public static void writeInitC(ArrayList<Mode> modes, String pathToCode) throws Exception
 	{
 		System.out.println("Writing to init.c");
 		FileReader fileReader;
 		
 		try
 		{
-			fileReader = new FileReader(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c"));
+			fileReader = new FileReader(new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "init.c"));
 		}
 		catch (FileNotFoundException e)
 		{
@@ -98,7 +99,7 @@ public class Output {
 		
 		BufferedReader reader = new BufferedReader(fileReader);
 		String line;
-		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c.temp"));
+		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "init.c.temp"));
 		
 		boolean hitDeclarations = false;
 		boolean deletedLine = false;
@@ -140,12 +141,12 @@ public class Output {
 		
 		reader.close();
 		writer.close();
-		File oldFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c");
+		File oldFile = new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "init.c");
 		Path oldFilePath = oldFile.toPath();
 		Files.delete(oldFilePath);
 		
-		File tempFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "init.c.temp");
-		File newFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\init.c");
+		File tempFile = new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "init.c.temp");
+		File newFile = new File(System.getProperty("user.dir") + pathToCode + "\\src\\init.c");
 		
 		if( ! tempFile.renameTo(newFile))
 		{
@@ -155,14 +156,14 @@ public class Output {
 		System.out.println("Finished writing to init.c");
 	}
 	
-	public static void writeAutoC(ArrayList<Mode> modes) throws Exception
+	public static void writeAutoC(ArrayList<Mode> modes, String pathToCode) throws Exception
 	{
 		System.out.println("Writing to Auto.c");
 		FileReader fileReader;
 		
 		try
 		{
-			fileReader = new FileReader(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c"));
+			fileReader = new FileReader(new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "auto.c"));
 		}
 		catch (FileNotFoundException e)
 		{
@@ -172,7 +173,7 @@ public class Output {
 		
 		BufferedReader reader = new BufferedReader(fileReader);
 		String line;
-		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c.temp"));
+		PrintWriter writer = new PrintWriter(new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "auto.c.temp"));
 		
 		boolean hitDeclarations = false;
 		boolean pastDeclarations = false;
@@ -233,12 +234,12 @@ public class Output {
 		
 		writer.close();
 		reader.close();
-		File oldFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c");
+		File oldFile = new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "auto.c");
 		Path oldFilePath = oldFile.toPath();
 		Files.delete(oldFilePath);
 		
-		File tempFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\", "auto.c.temp");
-		File newFile = new File(System.getProperty("user.dir") + "\\robot\\code\\src\\auto.c");
+		File tempFile = new File(System.getProperty("user.dir") + pathToCode + "\\src\\", "auto.c.temp");
+		File newFile = new File(System.getProperty("user.dir") + pathToCode + "\\src\\auto.c");
 		
 		if( ! tempFile.renameTo(newFile))
 		{

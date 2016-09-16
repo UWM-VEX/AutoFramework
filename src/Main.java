@@ -9,6 +9,7 @@ public class Main {
 
 	public static ArrayList<Method> methods;
 	private static int commandCounter = 0;
+	public static final boolean PRODUCTION = true;
 	
 	public static void main(String[] args)
 	{
@@ -135,7 +136,18 @@ public class Main {
 			
 			reader.close();
 			
-			Output.outputToCode(modes);
+			String pathToCode = "";
+			
+			if(Main.PRODUCTION)
+			{
+				pathToCode = args[1];
+			}
+			else
+			{
+				pathToCode = "\\robot\\code";
+			}
+			
+			Output.outputToCode(modes, pathToCode);
 		}
 		catch(IOException e)
 		{
