@@ -165,8 +165,20 @@ public class Main {
 		try
 		{
 			methods = new ArrayList<Method>();
-			Method driveToWP = new Method("driveToWP", "DriveToWP", "initDriveToWP", ".isFinished", true, new Property("double", "magnitude", "mag", "magnitude", "y"));
+			Method driveToWP = new Method("driveToWP", "DriveToWP",
+					"initDriveToWP", ".isFinished", true,
+					new Property("double", "magnitude", "mag",
+							"magnitude", "y"));
 			methods.add(driveToWP);
+			Method autoCock = new Method("autoCock", "AutoCock",
+					"initAutoCock", ".isFinished", true);
+			methods.add(autoCock);
+			Method autoFire = new Method("autoFire", "AutoFire",
+					"initAutoFire", ".isFinished", true);
+			methods.add(autoFire);
+			Method autoDumper = new Method("autoDumper", "AutoDumper",
+					"initAutoDumper", ".isFinished", true);
+			methods.add(autoDumper);
 		}
 		catch (InvalidTypeException e)
 		{
@@ -177,6 +189,8 @@ public class Main {
 
 	public static Method identifyMethod(String text) throws MethodNotFoundException
 	{
+		
+		
 		for(Method method : methods)
 		{
 			if(text.equals(method.getJavaCommand()))
