@@ -179,6 +179,9 @@ public class Main {
 			Method autoDumper = new Method("autoDumper", "AutoDumper",
 					"initAutoDumper", ".isFinished", true);
 			methods.add(autoDumper);
+			Method timeout = new Method("timeout", "Timeout",
+					"initTimeout", ".isFinished", true);
+			methods.add(timeout);
 		}
 		catch (InvalidTypeException e)
 		{
