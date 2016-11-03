@@ -99,12 +99,12 @@ public class Method {
 	
 	public String getRunReference(String instance)
 	{
-		return this.javaCommand + "(" + ((this.pointer) ? "&" : "") + instance + ");";
+		return this.javaCommand + "(" + instance + ");";
 	}
 	
 	public String getDoneReference(String instance)
 	{
-		if(pointer)
+		if(this.pointer)
 		{
 			return "(*" + instance + ")" + this.doneReference;
 		}
@@ -112,5 +112,10 @@ public class Method {
 		{
 			return instance + this.doneReference + ";";
 		}
+	}
+	
+	public boolean isPointer()
+	{
+		return this.pointer;
 	}
 }

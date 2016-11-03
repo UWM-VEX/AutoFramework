@@ -5,6 +5,7 @@ import exceptions.PropertyNotFoundException;
 
 public class Block extends Step {
 	private ArrayList<Command> commands;
+	private BlockDoneCriteria doneCriteria = new BlockDoneCriteria();
 	
 	public Block()
 	{
@@ -14,6 +15,7 @@ public class Block extends Step {
 	public void addCommand(String command, int id) throws MethodNotFoundException, PropertyNotFoundException
 	{
 		this.commands.add(new Command(command, id));
+		this.doneCriteria.addCommand(command);
 	}
 	
 	public String toString()
@@ -39,23 +41,55 @@ public class Block extends Step {
 		
 		execution += "\t\t\t\tautonomousInfo.isFinished = ";
 		
-		boolean isFirst = true;
-		
-		for(Command command : this.commands)
+		for(int i = 0; i < this.commands.size(); i++)
 		{
-			if( ! isFirst)
+			boolean isLast = i == (this.commands.size() - 1);
+			
+			if( ! isLast)
 			{
-				execution += " && " + command.getDoneReference();
+				execution += this.commands.get(i).getDoneReference() +
+						" " + this.doneCriteria.getNextCriteria() + " ";
 			}
 			else
 			{
-				execution += command.getDoneReference();
-				isFirst = false;
+				execution += this.commands.get(i).getDoneReference();
 			}
 		}
 		
 		execution += ";" + System.getProperty("line.separator") + "\t\t\t\tbreak;";
 		
 		return execution;
+	}
+	
+	public String getDeclaration()
+	{
+		String output = "";
+		
+		for(Command command : this.commands)
+		{
+			output += command.getDeclaration() + System.getProperty("line.separator");
+		}
+		
+		return output;
+	}
+	
+	public String getInstantiation()
+	{
+		String output = "";
+		boolean isFirstLoop = true;
+		
+		for(Command command : this.commands)
+		{
+			if( ! isFirstLoop)
+			{
+				output += "\t";
+			}
+			
+			output += command.getInstantiation() + System.getProperty("line.separator");
+			
+			isFirstLoop = false;
+		}
+		
+		return output;
 	}
 }

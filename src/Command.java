@@ -39,7 +39,7 @@ public class Command extends Step {
 		
 		super.doneCriteria = new CommandDoneCriteria();
 		this.constructor = method.buildConstructor(entries);
-		this.additionalProperties = method.buildAdditionalProperties(entries);
+		//this.additionalProperties = method.buildAdditionalProperties(entries);
 	}
 	
 	public String toString()
@@ -61,7 +61,14 @@ public class Command extends Step {
 	
 	public String getDeclaration()
 	{
-		return this.method.getDeclaration() + " " + this.name + ";";
+		if(this.method.isPointer())
+		{
+			return this.method.getDeclaration() + " * " + this.name + ";";
+		}
+		else
+		{
+			return this.method.getDeclaration() + " " + this.name + ";";
+		}		
 	}
 	
 	public String getInstantiation()

@@ -41,7 +41,10 @@ public class Output {
 		
 		while((line = reader.readLine()) != null)
 		{
-			pastDeclarations = line.indexOf("// END OF MODES") != -1;
+			if(line.indexOf("// END OF MODES") != -1)
+			{
+				pastDeclarations = true;
+			}
 			
 			if( ! hitDeclarations || pastDeclarations)
 			{

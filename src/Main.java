@@ -165,7 +165,7 @@ public class Main {
 		try
 		{
 			methods = new ArrayList<Method>();
-			Method driveToWP = new Method("DriveToWP", "DriveToWP", "initDriveToWP", ".isFinished", true, new Property("double", "magnitude", "mag", "magnitude", "y"));
+			Method driveToWP = new Method("driveToWP", "DriveToWP", "initDriveToWP", ".isFinished", true, new Property("double", "magnitude", "mag", "magnitude", "y"));
 			methods.add(driveToWP);
 		}
 		catch (InvalidTypeException e)
