@@ -1,3 +1,4 @@
+/exceptions/
 /Block.class
 /BlockDoneCriteria.class
 /Command.class
@@ -5,9 +6,7 @@
 /DoneCriteria.class
 /Main.class
 /Method.class
+/Mode.class
+/Output.class
 /Property.class
 /Step.class
-/exceptions/
-/Mode.class
-/Mode$Mode.class
-/Output.class

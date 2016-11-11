@@ -182,6 +182,12 @@ public class Main {
 			Method timeout = new Method("timeout", "Timeout",
 					"initTimeout", ".isFinished", true);
 			methods.add(timeout);
+			Method liftLock = new Method("autoLiftLock", "AutoLiftLock",
+					"initAutoLiftLock", ".isFinished", true);
+			methods.add(liftLock);
+			Method tippers = new Method("autoTippers", "AutoTippers",
+					"initAutoTippers", ".isFinished", true);
+			methods.add(tippers);
 		}
 		catch (InvalidTypeException e)
 		{
