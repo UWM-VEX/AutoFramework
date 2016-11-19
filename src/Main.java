@@ -170,8 +170,6 @@ public class Main {
 	{
 		MethodIdentifier methodIdentifier = new MethodIdentifier("methods.xml");
 		methods = methodIdentifier.parseMethods();
-		
-		System.out.println(methods);
 	}
 
 	public static Method identifyMethod(String text) throws MethodNotFoundException
