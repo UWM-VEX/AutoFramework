@@ -37,6 +37,8 @@ public class Main {
 			int id = 0;
 			while((line = reader.readLine()) != null)
 			{
+				line = line.trim();
+				
 				if(inComment)
 				{
 					if(line.indexOf("##") != -1)
