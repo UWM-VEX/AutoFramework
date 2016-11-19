@@ -66,7 +66,14 @@ public class Main {
 					
 					if(line.indexOf("//") != -1)
 					{
-						line = line.substring(0, line.indexOf("//"));
+						if(line.indexOf("//") == 0)
+						{
+							continue;
+						}
+						else
+						{
+							line = line.substring(0, line.indexOf("//"));
+						}
 					}
 					
 					if(line.indexOf('{') != -1)
