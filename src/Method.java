@@ -23,6 +23,16 @@ public class Method {
 		this.pointer = pointer;
 	}
 	
+	public String toString()
+	{
+		return "javaCommand: " + javaCommand + "\n"
+				+ "declaration: " + declaration + "\n"
+				+ "instantiation: " + instantiation + "\n"
+				+ "reference: " + reference + "\n"
+				+ "doneReference: " + doneReference + "\n"
+				+ "pointer: " + pointer;
+	}
+	
 	public String buildConstructor(ArrayList<String> entries)
 	{
 		String contructor = this.instantiation;

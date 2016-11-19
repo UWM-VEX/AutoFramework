@@ -22,7 +22,13 @@ public class Main {
 		boolean inComment = false;
 		boolean inMode = false;
 		
-		defineMethods();
+		try {
+			defineMethods();
+		} catch (XMLException e1) {
+			System.out.println("Methods XML Exception.");
+			e1.printStackTrace();
+			System.exit(1);
+		}
 		
 		try
 		{
@@ -160,40 +166,12 @@ public class Main {
 		}
 	}
 	
-	public static void defineMethods()
+	public static void defineMethods() throws XMLException
 	{
-		try
-		{
-			methods = new ArrayList<Method>();
-			Method driveToWP = new Method("driveToWP", "DriveToWP",
-					"initDriveToWP", ".isFinished", true,
-					new Property("double", "magnitude", "mag",
-							"magnitude", "y"));
-			methods.add(driveToWP);
-			Method autoCock = new Method("autoCock", "AutoCock",
-					"initAutoCock", ".isFinished", true);
-			methods.add(autoCock);
-			Method autoFire = new Method("autoFire", "AutoFire",
-					"initAutoFire", ".isFinished", true);
-			methods.add(autoFire);
-			Method autoDumper = new Method("autoDumper", "AutoDumper",
-					"initAutoDumper", ".isFinished", true);
-			methods.add(autoDumper);
-			Method timeout = new Method("timeout", "Timeout",
-					"initTimeout", ".isFinished", true);
-			methods.add(timeout);
-			Method liftLock = new Method("autoLiftLock", "AutoLiftLock",
-					"initAutoLiftLock", ".isFinished", true);
-			methods.add(liftLock);
-			Method tippers = new Method("autoTippers", "AutoTippers",
-					"initAutoTippers", ".isFinished", true);
-			methods.add(tippers);
-		}
-		catch (InvalidTypeException e)
-		{
-			System.out.println("Invalid Type");
-			System.exit(1);
-		}
+		MethodIdentifier methodIdentifier = new MethodIdentifier("methods.xml");
+		methods = methodIdentifier.parseMethods();
+		
+		System.out.println(methods);
 	}
 
 	public static Method identifyMethod(String text) throws MethodNotFoundException
