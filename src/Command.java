@@ -13,32 +13,23 @@ public class Command extends Step {
 	
 	public Command(String text, int id) throws MethodNotFoundException, PropertyNotFoundException
 	{
-		this.entries = new ArrayList<String>(Arrays.asList(text.split(" ")));
+		this.entries = new ArrayList<String>(Arrays.asList(text.split("\\("))); // Regex for (
 		this.name = "command" + id;
 		
 		if(this.entries.size() > 1)
 		{
-			if(this.entries.get(1).equals("="))
-			{
-				this.method = Main.identifyMethod(entries.get(2));
-				entries.remove(0);
-				entries.remove(1);
-				entries.remove(2);
-			}
-			else
-			{
-				this.method = Main.identifyMethod(entries.get(0));
-				this.entries.remove(0);
-			}
+			this.method = Main.identifyMethod(entries.get(0).trim());
+			this.entries.remove(0);
 		}
 		else
 		{
-			this.method = Main.identifyMethod(entries.get(0));
-			this.entries.remove(0);
+			System.out.println("Exception at command: " + entries.get(0));
+			System.out.println("Commands must have parenthesis.");
+			throw new MethodNotFoundException();
 		}
 		
 		super.doneCriteria = new CommandDoneCriteria();
-		this.constructor = method.buildConstructor(entries);
+		this.constructor = method.buildInstantiation(entries);
 		//this.additionalProperties = method.buildAdditionalProperties(entries);
 	}
 	

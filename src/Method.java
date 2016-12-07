@@ -33,9 +33,11 @@ public class Method {
 				+ "pointer: " + pointer;
 	}
 	
-	public String buildConstructor(ArrayList<String> entries)
+	public String buildInstantiation(ArrayList<String> entries)
 	{
 		String contructor = this.instantiation;
+		
+		contructor += "(";
 		
 		for(String entry : entries)
 		{
