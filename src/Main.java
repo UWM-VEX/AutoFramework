@@ -149,6 +149,18 @@ public class Main {
 				}
 			}
 			
+			if(inMode)
+			{
+				System.out.println("Error: Mode not closed.");
+				System.exit(1);
+			}
+			
+			if(inBlock)
+			{
+				System.out.println("Error: Block not closed.");
+				System.exit(1);
+			}
+			
 			for(Mode element : modes)
 			{
 				System.out.println(element);
