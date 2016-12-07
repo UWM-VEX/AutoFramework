@@ -62,6 +62,11 @@ public class Main {
 					}
 				}
 				
+				if(line.indexOf("//") != -1)
+				{
+					line = line.substring(0, line.indexOf("//"));
+				}
+				
 				if(inMode)
 				{
 					if(line.indexOf("End Mode") != -1)
@@ -76,10 +81,6 @@ public class Main {
 						if(line.indexOf("//") == 0)
 						{
 							continue;
-						}
-						else
-						{
-							line = line.substring(0, line.indexOf("//"));
 						}
 					}
 					
