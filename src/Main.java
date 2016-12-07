@@ -39,6 +39,11 @@ public class Main {
 			{
 				line = line.trim();
 				
+				if(line.isEmpty())
+				{
+					continue;
+				}
+				
 				if(inComment)
 				{
 					if(line.indexOf("##") != -1)
