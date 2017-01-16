@@ -69,7 +69,7 @@ public class Main {
 				
 				if(inMode)
 				{
-					if(line.indexOf("End Mode") != -1)
+					if(line.indexOf("EndMode") != -1)
 					{
 						inMode = false;
 						modes.add(mode);
