@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import exceptions.InvalidCommandException;
 import exceptions.PropertyNotFoundException;
 
 public class Method {
@@ -33,7 +34,7 @@ public class Method {
 				+ "pointer: " + pointer;
 	}
 	
-	public String buildInstantiation(ArrayList<String> entries)
+	public String buildInstantiation(ArrayList<String> entries) throws InvalidCommandException
 	{
 		String contructor = this.instantiation;
 		
@@ -41,11 +42,17 @@ public class Method {
 		
 		for(String entry : entries)
 		{
-			contructor += entry;
+			String[] subEntries = entry.split("\\)");
 			
-			if(entry.endsWith(")"))
+			contructor += subEntries[0];
+			
+			if(entry.indexOf(")") != -1)
 			{
-				return contructor;
+				return contructor + ")";
+			}
+			else
+			{
+				throw new InvalidCommandException();
 			}
 		}
 		

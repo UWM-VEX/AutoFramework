@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import exceptions.InvalidCommandException;
 import exceptions.MethodNotFoundException;
 import exceptions.PropertyNotFoundException;
 
@@ -12,7 +13,7 @@ public class Block extends Step {
 		this.commands = new ArrayList<Command>();
 	}
 	
-	public void addCommand(String command, int id) throws MethodNotFoundException, PropertyNotFoundException
+	public void addCommand(String command, int id) throws MethodNotFoundException, PropertyNotFoundException, InvalidCommandException
 	{
 		this.commands.add(new Command(command, id));
 		this.doneCriteria.addCommand(command);

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import exceptions.InvalidCommandException;
 import exceptions.MethodNotFoundException;
 import exceptions.PropertyNotFoundException;
 
@@ -11,7 +12,7 @@ public class Command extends Step {
 	private ArrayList<String> additionalProperties;
 	private String name;
 	
-	public Command(String text, int id) throws MethodNotFoundException, PropertyNotFoundException
+	public Command(String text, int id) throws MethodNotFoundException, PropertyNotFoundException, InvalidCommandException
 	{
 		this.entries = new ArrayList<String>(Arrays.asList(text.split("\\("))); // Regex for (
 		this.name = "command" + id;
