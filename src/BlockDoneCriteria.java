@@ -5,22 +5,15 @@ public class BlockDoneCriteria extends DoneCriteria {
 	
 	void addCommand(String command)
 	{
-		String[] words = command.split(" ");
 		String criteria = "";
 		
-		if(words.length < 3)
+		if(command.indexOf("&&") != -1)
 		{
 			criteria = "&&";
 		}
-		
-		for(int i = 2; words.length > i; i++)
+		else if(command.indexOf("||") != -1)
 		{
-			criteria += words[i];
-			
-			if(i != (words.length - 1))
-			{
-				criteria += " ";
-			}
+			criteria = "||";
 		}
 		
 		this.criterias.add(criteria);
