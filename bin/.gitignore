@@ -1,8 +1,3 @@
-/Block.class
-/BlockDoneCriteria.class
-/Command.class
-/CommandDoneCriteria.class
-/DoneCriteria.class
 /Main.class
 /Method.class
 /MethodIdentifier.class
@@ -11,3 +6,8 @@
 /Property.class
 /Step.class
 /exceptions/
+/Block.class
+/BlockDoneCriteria.class
+/Command.class
+/CommandDoneCriteria.class
+/DoneCriteria.class

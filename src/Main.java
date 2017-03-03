@@ -67,6 +67,9 @@ public class Main {
 					line = line.substring(0, line.indexOf("//"));
 				}
 				
+				if(line.trim().length() == 0)
+					continue;
+				
 				if(inMode)
 				{
 					if(line.indexOf("EndMode") != -1)

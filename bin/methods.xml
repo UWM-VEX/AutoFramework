@@ -14,4 +14,18 @@
 		<doneReference>.isFinished</doneReference>
 		<pointer>true</pointer>
 	</method>
+	<method>
+		<javaCommand>autoClaw</javaCommand>
+		<declaration>AutoClaw</declaration>
+		<instantiation>initAutoClaw</instantiation>
+		<doneReference>.isFinished</doneReference>
+		<pointer>true</pointer>
+	</method>
+	<method>
+		<javaCommand>autoDumper</javaCommand>
+		<declaration>AutoDumper</declaration>
+		<instantiation>initAutoDumper</instantiation>
+		<doneReference>.isFinished</doneReference>
+		<pointer>true</pointer>
+	</method>
 </methods>
