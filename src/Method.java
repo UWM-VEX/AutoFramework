@@ -36,27 +36,26 @@ public class Method {
 	
 	public String buildInstantiation(ArrayList<String> entries) throws InvalidCommandException
 	{
-		String contructor = this.instantiation;
+		String constructor = this.instantiation;
 		
-		contructor += "(";
+		constructor += "(";
 		
 		for(String entry : entries)
 		{
-			String[] subEntries = entry.split("\\)");
-			
-			contructor += subEntries[0];
-			
+			System.out.println("Entry: " + entry);
 			if(entry.indexOf(")") != -1)
 			{
-				return contructor + ")";
+				constructor += entry.substring(0, entry.lastIndexOf(")"));//subEntries[0];
 			}
 			else
 			{
-				throw new InvalidCommandException();
+				constructor += entry;
 			}
+			
+			return constructor + ")";
 		}
 		
-		return contructor + ")";
+		return constructor + ")";
 	}
 	
 	public ArrayList<String> buildAdditionalProperties(ArrayList<String> entries) throws PropertyNotFoundException

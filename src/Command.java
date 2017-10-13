@@ -14,7 +14,7 @@ public class Command extends Step {
 	
 	public Command(String text, int id) throws MethodNotFoundException, PropertyNotFoundException, InvalidCommandException
 	{
-		this.entries = new ArrayList<String>(Arrays.asList(text.split("\\("))); // Regex for (
+		this.entries = new ArrayList<String>(Arrays.asList(text.split("(?<!_)\\("))); // Regex for ( with no _ ahead of it
 		this.name = "command" + id;
 		
 		if(this.entries.size() > 1)
